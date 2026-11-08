@@ -12,7 +12,9 @@
     "format": "prettier --write .",
     "prepare": "husky",
     "test": "vitest",
-    "test:ci": "vitest run"
+    "test:ci": "vitest run",
+    "test:e2e": "playwright test --config e2e-playwright/playwright.config.ts",
+    "test:e2e:ui": "playwright test --ui --config e2e-playwright/playwright.config.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "^5.107.1",
@@ -23,6 +25,7 @@
   "devDependencies": {
     "@babel/core": "^7.29.13",
     "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.65.0",
     "@rolldown/plugin-babel": "^0.3.0",
     "@tanstack/eslint-plugin-query": "^5.107.1",
     "@testing-library/dom": "^10.4.2",
@@ -55,7 +58,8 @@
   "overrides": {
     "eslint-plugin-react": {
       "eslint": "$eslint"
-    }
+    },
+    "minimatch@^10": "^11.0.5"
   },
   "lint-staged": {
     "*.{js,ts,tsx}": [
@@ -65,5 +69,8 @@
     "*.{json,css,md,html}": [
       "npm run format"
     ]
+  },
+  "engines": {
+    "node": ">=22.22.2 <23"
   }
 }

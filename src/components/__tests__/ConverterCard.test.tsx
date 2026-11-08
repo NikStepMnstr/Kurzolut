@@ -44,12 +44,30 @@ describe('ConverterCard', () => {
     expect(await screen.findByText('0.04')).toBeInTheDocument();
   });
 
-  it('shows a dash for an invalid amount', async () => {
+  it('ignores anything that is not a number', async () => {
     renderWithProviders(<ConverterCard selectedRate={eur} />);
 
     const amountInput = screen.getByLabelText('Amount in CZK');
     await userEvent.clear(amountInput);
-    await userEvent.type(amountInput, 'abc');
+    await userEvent.type(amountInput, '1a2 -e3');
+
+    expect(amountInput).toHaveValue('123');
+  });
+
+  it('allows only one decimal separator', async () => {
+    renderWithProviders(<ConverterCard selectedRate={eur} />);
+
+    const amountInput = screen.getByLabelText('Amount in CZK');
+    await userEvent.clear(amountInput);
+    await userEvent.type(amountInput, '1.2,3.4');
+
+    expect(amountInput).toHaveValue('1.234');
+  });
+
+  it('shows a dash when the amount is empty', async () => {
+    renderWithProviders(<ConverterCard selectedRate={eur} />);
+
+    await userEvent.clear(screen.getByLabelText('Amount in CZK'));
 
     expect(await screen.findByText('–')).toBeInTheDocument();
   });

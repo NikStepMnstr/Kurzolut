@@ -116,6 +116,7 @@ export default defineConfig([
             '**/*.config.{js,ts}',
             '**/*.test.{ts,tsx}',
             'src/test/**',
+            'e2e-playwright/**',
           ],
         },
       ],

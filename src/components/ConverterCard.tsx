@@ -13,6 +13,7 @@ import {
 } from '../utils/currency.ts';
 
 const DEFAULT_AMOUNT = '1000';
+const NUMERIC_INPUT = /^\d*[.,]?\d*$/;
 
 const Card = styled.section`
   ${fadeIn}
@@ -93,7 +94,11 @@ export const ConverterCard = ({ selectedRate }: ConverterCardProps) => {
   const czk = parseAmount(debouncedInput);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInput(event.target.value);
+    const { value } = event.target;
+
+    if (NUMERIC_INPUT.test(value)) {
+      setInput(value);
+    }
   };
 
   return (
