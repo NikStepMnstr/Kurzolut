@@ -161,6 +161,12 @@ export default defineConfig([
     },
   },
   {
+    files: ['src/test/**', '**/__tests__/**'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
+    },
+  },
+  {
     files: ['**/*.test.{ts,tsx}'],
     plugins: { jest },
     rules: {

@@ -9,9 +9,25 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     margin: 0;
-    background: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.text};
-    font-family: ${({ theme }) => theme.fontFamily};
+    background: ${({ theme }) => theme.colors.cream};
+    color: ${({ theme }) => theme.colors.navy};
+    font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: ${({ theme }) => theme.fontSize.body};
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+  }
+
+  button,
+  input {
+    font: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation: none !important;
+      transition: none !important;
+    }
   }
 `;
